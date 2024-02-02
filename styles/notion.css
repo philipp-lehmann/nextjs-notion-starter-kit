@@ -6,10 +6,33 @@
  * whereas our goal with this site is to adjust Notion's styling in a few key
  * places to add some flare.
  */
+ @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;600&display=swap');
 
-.notion {
-  --notion-max-width: 720px;
+ :root {
+  --bg-start-color: rgba(255,255,255,0.85); /* Transparent */
+  --bg-end-color: rgba(255,255,255,1); /* Black */
+  --bg-color: #ffffff;
+}
+
+.dark-mode {
+  --bg-color: #121212;
+  --bg-start-color: rgba(20,20,20,0.85); /* Transparent */
+  --bg-end-color: rgba(20,20,20,1); /* Black */
+}
+
+.notion, 
+.notion .index-page {
+  --notion-max-width: 1200px;
   --notion-header-height: 54px;
+  --notion-font: 'Inter', sans-serif;
+}
+
+.notion .notion-header .notion-nav-header {
+  max-width: 1200px;
+}
+
+.notion .notion-page-content-has-aside {
+  width: 100%;
 }
 
 .notion-frame {
@@ -54,9 +77,10 @@
 }
 
 .notion-gallery-grid {
-  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
-  grid-gap: 6vmin;
-  gap: 6vmin;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  grid-gap: 2vmin;
+  gap: 2vmin;
+  border-top: none;
 }
 
 .notion-gallery-grid .notion-page-icon-inline {
@@ -65,6 +89,7 @@
 
 .notion-gallery-grid .notion-page-title-text {
   font-size: 2em;
+  font-weight: 600;
   white-space: unset;
 }
 
@@ -169,7 +194,7 @@
 
 .notion-title {
   display: block;
-  text-align: center;
+  text-align: left;
 }
 
 .notion-collection-row {
@@ -195,12 +220,21 @@
 .notion-page-cover-wrapper,
 .notion-page-cover-wrapper span,
 .notion-page-cover-wrapper img {
-  max-width: 1200px !important;
-  border-radius: 24px;
+  position: fixed;
+  max-width: 100% !important;
+  top: 0;
+  opacity: 0.6;
 }
 
-.notion-page-cover-wrapper {
-  box-shadow: 2px 2px 8px 4px rgba(15, 15, 15, 0.1);
+.notion-page-cover-wrapper::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to bottom, var(--bg-start-color) 0%, var(--bg-end-color) 100%);
+  pointer-events: none;
 }
 
 @media only screen and (max-width: 1200px) {
@@ -220,6 +254,10 @@
   background: rgba(249, 250, 251, 1);
   border: 1px solid rgba(229, 231, 235, 1);
   border-radius: 0.375rem;
+}
+
+.notion-item-default {
+  background-color: transparent;
 }
 
 .notion-link {
@@ -333,6 +371,8 @@
 }
 
 /* disable highlighting in dark mode */
+
+
 .dark-mode .notion-red_background,
 .dark-mode .notion-pink_background,
 .dark-mode .notion-blue_background,
@@ -359,21 +399,11 @@
 }
 
 .notion-header {
-  background: hsla(0, 0%, 100%, 0.8);
-  backdrop-filter: saturate(180%) blur(16px);
-}
-
-.dark-mode .notion-header {
   background: transparent;
-  box-shadow: inset 0 -1px 0 0 rgba(0, 0, 0, 0.1);
-  backdrop-filter: saturate(180%) blur(20px);
 }
 
-/* Workaround for Firefox not supporting backdrop-filter yet */
-@-moz-document url-prefix() {
-  .dark-mode .notion-header {
-    background: hsla(203, 8%, 20%, 0.8);
-  }
+.notion-header .breadcrumb {
+  padding: 12px;
 }
 
 .notion-bookmark:hover {
