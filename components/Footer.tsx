@@ -9,7 +9,6 @@ import { FaYoutube } from '@react-icons/all-files/fa/FaYoutube'
 import { FaZhihu } from '@react-icons/all-files/fa/FaZhihu'
 
 import * as config from '@/lib/config'
-import { useDarkMode } from '@/lib/use-dark-mode'
 
 import styles from './styles.module.css'
 
@@ -19,14 +18,6 @@ export const FooterImpl: React.FC = () => {
   const [hasMounted, setHasMounted] = React.useState(false)
   const { isDarkMode, toggleDarkMode } = useDarkMode()
   const currentYear = new Date().getFullYear()
-
-  const onToggleDarkMode = React.useCallback(
-    (e) => {
-      e.preventDefault()
-      toggleDarkMode()
-    },
-    [toggleDarkMode]
-  )
 
   React.useEffect(() => {
     setHasMounted(true)
