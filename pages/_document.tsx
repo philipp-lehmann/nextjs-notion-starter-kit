@@ -1,7 +1,5 @@
 import * as React from 'react'
 import Document, { Head, Html, Main, NextScript } from 'next/document'
-import { SpeedInsights } from '@vercel/speed-insights/next';
-
 import { IconContext } from '@react-icons/all-files'
 
 export default class MyDocument extends Document {
@@ -65,7 +63,6 @@ export default class MyDocument extends Document {
             <Main />
 
             <NextScript />
-            <SpeedInsights />
           </body>
         </Html>
       </IconContext.Provider>
