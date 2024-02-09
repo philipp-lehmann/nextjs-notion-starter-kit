@@ -1,11 +1,7 @@
 /**
- * This file contains site-specifc style overrides for Notion elements from
- * react-notion-x.
- *
- * react-notion-x's goal is to match styling as close as possible to Notion,
- * whereas our goal with this site is to adjust Notion's styling in a few key
- * places to add some flare.
+ * This file contains RDFN site-specifc style overrides and layout adjustments
  */
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;600&display=swap');
 
 @font-face {
@@ -26,21 +22,28 @@
   font-weight: 700;
 }
 
-
 :root {
   --bg-start-color: rgba(255, 255, 255, 0.85);
-  /* Transparent */
   --bg-end-color: rgba(255, 255, 255, 1);
-  /* Black */
   --bg-color: #ffffff;
+  --fg-color: rgba(0, 0, 0, 0.9);
+  --fg-color-0: var(--fg-color);
+  --fg-color-1: var(--fg-color);
+  --fg-color-2: rgba(0, 0, 0, 0.8);
+  --fg-color-3: rgba(0, 0, 0, 0.65);
+  --fg-color-4: rgba(0, 0, 0, 0.45);
 }
 
 .dark-mode {
   --bg-color: #121212;
   --bg-start-color: rgba(20, 20, 20, 0.85);
-  /* Transparent */
   --bg-end-color: rgba(20, 20, 20, 1);
-  /* Black */
+  --fg-color: rgba(255, 255, 255, 0.9);
+  --fg-color-0: var(--fg-color);
+  --fg-color-1: var(--fg-color);
+  --fg-color-2: rgba(255, 255, 255, 0.8);
+  --fg-color-3: rgba(255, 255, 255, 0.65);
+  --fg-color-4: rgba(255, 255, 255, 0.45);
 }
 
 .notion,
@@ -55,21 +58,58 @@
   font-size: 20px;
 }
 
-.notion .notion-page-content-has-aside {
-  width: 100%;
-}
-
+/* Page layout */
 .notion-frame {
   padding: 0;
 }
 
 .notion-page {
+  display: block;
   padding-bottom: calc(max(5vh, 32px)) !important;
   line-height: 1.65;
 }
 
 .index-page {
   --notion-max-width: 900px;
+}
+
+@media only screen and (min-width: 920px) {
+  .notion .notion-page {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+  }
+
+  .notion-page-content {
+    width: 100%;
+  }
+
+  .notion-collection-page-properties + .notion-page-content {
+    width: 72%;
+  }
+
+  .notion-collection-page-properties {
+    order: 2;
+    width: calc(28% - 2rem);
+    padding: 1rem;
+  }
+
+  .notion-collection-row-property {
+    display: flex;
+    align-items: start;
+    flex-direction: column;
+    padding: 0 0 0.25rem 0;
+  }
+}
+
+/* Content elements */
+.notion-title {
+  display: block;
+  text-align: left;
+}
+
+.notion .index-page h1.notion-title {
+  display: none;
 }
 
 .notion-text {
@@ -81,7 +121,6 @@
 }
 
 .notion-asset-wrapper {
-  margin-top: 1em;
   margin-bottom: 1em;
 }
 
@@ -108,10 +147,6 @@
 }
 
 .notion-gallery-grid .notion-page-icon-inline {
-  display: none;
-}
-
-.notion .index-page h1.notion-title {
   display: none;
 }
 
@@ -225,10 +260,7 @@
   margin-right: auto;
 }
 
-.notion-title {
-  display: block;
-  text-align: left;
-}
+
 
 .notion-collection-row {
   padding-bottom: 1em;
@@ -236,18 +268,70 @@
   padding: 0;
 }
 
-.notion-collection-page-properties .notion-collection-column-title {
-  /* display: none; */
+@keyframes fadeInProperties {
+  0% {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
-.notion-collection-page-properties .notion-collection-column-title svg {
+.notion-collection-row-property {
+  opacity: 0;
+  animation: fadeInProperties 0.5s ease forwards; 
+  animation-delay: calc(var(--index) * 0.1s); 
+}
+
+.notion-collection-row-property {
+  --index: 0; 
+}
+
+.notion-collection-row-property:nth-child(1) {
+  --index: 1;
+}
+
+.notion-collection-row-property:nth-child(2) {
+  --index: 2;
+}
+
+.notion-collection-row-property:nth-child(3) {
+  --index: 3;
+}
+
+.notion-collection-row-property:nth-child(4) {
+  --index: 4;
+}
+
+.notion-collection-row-property:nth-child(5) {
+  --index: 5;
+}
+
+.notion-collection-row-property:nth-child(6) {
+  --index: 6;
+}
+.notion-collection-row-property:nth-child(7) {
+  --index: 7;
+}
+
+.notion-collection-row-property:nth-child(8) {
+  --index: 8;
+}
+
+.notion-collection-row-property .notion-collection-column-title {
+  /* labels */
+  color: var(--fg-color-3);
+  height: 28px;
+}
+
+.notion-collection-column-title svg {
   display: none;
 }
 
-.notion-collection-row-property .notion-property {
-  display: flex;
-  justify-content: flex-start;
-}
+
+
 
 .notion-collection-row-value {
   display: flex;
@@ -277,7 +361,6 @@
 }
 
 @media only screen and (max-width: 1200px) {
-
   .notion-page-cover-wrapper,
   .notion-page-cover-wrapper span,
   .notion-page-cover-wrapper img {
