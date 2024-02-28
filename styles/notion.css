@@ -190,12 +190,15 @@
 
 .notion-collection-card-cover {
   border-bottom: 0 none;
-  transition: filter 150ms linear;
+  transition: all 150ms ease-in-out;
   filter: none;
 }
 
-.notion-collection-card:hover .notion-collection-card-cover {
+a.notion-collection-card:hover .notion-collection-card-cover {
   filter: brightness(120%);
+  box-shadow: 0 8px 40px 0 rgb(0 0 0 / 21%);
+  transform: scale(1.02);
+  background: var(--bg-color);
 }
 
 .notion-collection-card-body {
