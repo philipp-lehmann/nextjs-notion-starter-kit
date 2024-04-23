@@ -53,6 +53,10 @@ export default siteConfig({
   navigationStyle: 'custom',
   navigationLinks: [
     {
+      title: 'Photoplotter',
+      pageId: 'b870d9084d954356b00c04771ec03677'
+    }, 
+    {
       title: 'About',
       pageId: 'c0054a1d000446beb6baed4417066ed9'
     }
