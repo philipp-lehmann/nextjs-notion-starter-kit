@@ -191,7 +191,7 @@
 .notion-collection-card-cover {
   border-bottom: 0 none;
   transition: all 150ms ease-in-out;
-  filter: none;
+  filter: none; 
 }
 
 a.notion-collection-card:hover .notion-collection-card-cover {
