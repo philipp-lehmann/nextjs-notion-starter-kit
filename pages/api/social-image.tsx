@@ -6,12 +6,12 @@ import { ImageResponse } from '@vercel/og'
 import { api, apiHost, rootNotionPageId } from '@/lib/config'
 import { NotionPageInfo } from '@/lib/types'
 
-const interRegularFontP = fetch(
-  new URL('../../public/fonts/Inter-Regular.ttf', import.meta.url)
+const pressuraRegularFontP = fetch(
+  new URL('../../fonts/GT-Pressura-Light.ttf', import.meta.url)
 ).then((res) => res.arrayBuffer())
 
-const interBoldFontP = fetch(
-  new URL('../../public/fonts/Inter-SemiBold.ttf', import.meta.url)
+const pressuraBoldFontP = fetch(
+  new URL('../../fonts/GT-Pressura-Regular.ttf', import.meta.url)
 ).then((res) => res.arrayBuffer())
 
 export const config = {
@@ -38,142 +38,57 @@ export default async function OGImage(req: NextRequest) {
   const pageInfo: NotionPageInfo = await pageInfoRes.json()
   console.log(pageInfo)
 
-  const [interRegularFont, interBoldFont] = await Promise.all([
-    interRegularFontP,
-    interBoldFontP
+  const [pressuraRegularFont, pressuraBoldFont] = await Promise.all([
+    pressuraRegularFontP,
+    pressuraBoldFontP
   ])
 
   return new ImageResponse(
     (
       <div
         style={{
-          position: 'relative',
-          width: '100%',
           height: '100%',
+          width: '100%',
           display: 'flex',
           flexDirection: 'column',
-          backgroundColor: '#1F2027',
           alignItems: 'center',
           justifyContent: 'center',
-          fontFamily: '"Inter", sans-serif',
-          color: 'black'
+          backgroundColor: '#fff',
+          fontSize: 32,
+          fontWeight: 700,
+          fontFamily: '"GTPressura", sans-serif',
         }}
       >
-        {pageInfo.image && (
-          <img
-            src={pageInfo.image}
-            style={{
-              position: 'absolute',
-              width: '100%',
-              height: '100%',
-              objectFit: 'cover'
-              // TODO: satori doesn't support background-size: cover and seems to
-              // have inconsistent support for filter + transform to get rid of the
-              // blurred edges. For now, we'll go without a blur filter on the
-              // background, but Satori is still very new, so hopefully we can re-add
-              // the blur soon.
+        <svg width="69" height="111" viewBox="0 0 23 37" fill="black" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M15.0038 0H2.3148L2.29013 0.00020589C1.78168 0.00870424 1.36195 0.279513 1.10768 0.668882C1.03611 0.77784 0.977328 0.896945 0.933635 1.02375C0.865224 1.22045 0.8334 1.43239 0.8448 1.64715V34.957C0.8448 36.4625 2.65837 37.0931 3.49928 35.8801L12.5964 22.7568L19.9543 35.7589C20.372 36.497 21.2749 36.7364 21.9711 36.2935C22.6673 35.8506 22.893 34.8933 22.4753 34.1551L14.4841 20.0337L20.8632 10.8312C21.2126 10.3272 21.244 9.65049 20.9428 9.11259L16.2679 0.762981C16.0031 0.289967 15.5227 0 15.0038 0ZM17.9179 9.81656L14.167 3.11719H4.9111L12.8442 17.1358L17.9179 9.81656ZM3.7848 7.18561V30.2047L10.9565 19.8589L3.7848 7.18561Z" fill="#F7F7F7" />
+        </svg>
 
-              // backgroundImage: pageInfo.image
-              //   ? `url(${pageInfo.image})`
-              //   : undefined,
-              // backgroundSize: '100% 100%'
-              // TODO: pageInfo.imageObjectPosition
-              // filter: 'blur(8px)'
-              // transform: 'scale(1.05)'
-            }}
-          />
-        )}
-
-        <div
-          style={{
-            position: 'relative',
-            width: 900,
-            height: 465,
-            display: 'flex',
-            flexDirection: 'column',
-            border: '16px solid rgba(0,0,0,0.3)',
-            borderRadius: 8,
-            zIndex: '1'
-          }}
-        >
-          <div
-            style={{
-              width: '100%',
-              height: '100%',
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'space-around',
-              backgroundColor: '#fff',
-              padding: 24,
-              alignItems: 'center',
-              textAlign: 'center'
-            }}
-          >
-            {pageInfo.detail && (
-              <div style={{ fontSize: 32, opacity: 0 }}>{pageInfo.detail}</div>
-            )}
-
-            <div
-              style={{
-                fontSize: 70,
-                fontWeight: 700,
-                fontFamily: 'Inter'
-              }}
-            >
-              {pageInfo.title}
-            </div>
-
-            {pageInfo.detail && (
-              <div style={{ fontSize: 32, opacity: 0.6 }}>
-                {pageInfo.detail}
-              </div>
-            )}
-          </div>
+        <div style={{ marginTop: 40 }}>RDFN</div>
+        <div style={{ fontSize: 70, fontWeight: 400 }}>
+          {pageInfo.title}
         </div>
-
-        {pageInfo.authorImage && (
-          <div
-            style={{
-              position: 'absolute',
-              top: 47,
-              left: 104,
-              height: 128,
-              width: 128,
-              display: 'flex',
-              borderRadius: '50%',
-              border: '4px solid #fff',
-              zIndex: '5'
-            }}
-          >
-            <img
-              src={pageInfo.authorImage}
-              style={{
-                width: '100%',
-                height: '100%'
-                // transform: 'scale(1.04)'
-              }}
-            />
-          </div>
-        )}
       </div>
-    ),
-    {
-      width: 1200,
-      height: 630,
-      fonts: [
-        {
-          name: 'Inter',
-          data: interRegularFont,
-          style: 'normal',
-          weight: 400
-        },
-        {
-          name: 'Inter',
-          data: interBoldFont,
-          style: 'normal',
-          weight: 700
-        }
-      ]
-    }
-  )
+
+    )
+  ),
+  {
+    width: 1200,
+    height: 630,
+    fonts: [
+      {
+        name: 'GTPressura',
+        data: pressuraRegularFont,
+        style: 'normal',
+        weight: 400
+      },
+      {
+        name: 'GTPressura',
+        data: pressuraBoldFont,
+        style: 'normal',
+        weight: 700
+      }
+    ]
+  }
 }
+
+
