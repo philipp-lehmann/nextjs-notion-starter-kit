@@ -44,19 +44,24 @@ export default async function OGImage(req: NextRequest) {
           height: '100%',
           width: '100%',
           display: 'flex',
-          flexDirection: 'column',
+          flexDirection: 'row',
           alignItems: 'center',
           justifyContent: 'center',
-          backgroundColor: '#fff',
+          backgroundColor: '#000',
+          color: '#fff',
           fontFamily: '"Pressura", sans-serif',
         }}
       >
-        <svg width="164" height="262" viewBox="0 0 164 262" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M146.747 239.667L18.6111 22.3335H104.639L136.333 76.6668L18.6111 239.667V22.3335" stroke="black" strokeWidth="19.0167" strokeLinecap="round" strokeLinejoin="round"/>
+        <svg width="82" height="131" viewBox="0 0 164 262" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M146.747 239.667L18.6111 22.3335H104.639L136.333 76.6668L18.6111 239.667V22.3335" stroke="#fff" strokeWidth="19.0167" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
-        <div>
+        <span style={{
+          fontFamily: '"Pressura", sans-serif',
+          fontSize: 60,
+          margin: '0 5rem',
+        }}>
           RDFN
-        </div>
+        </span>
       </div>
     ),
     {
@@ -67,7 +72,7 @@ export default async function OGImage(req: NextRequest) {
           name: 'Pressura',
           data: pressuraRegularFont,
           style: 'normal',
-          weight: 400
+          weight: 500
         }
       ]
     }
