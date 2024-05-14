@@ -5,10 +5,6 @@ import { ImageResponse } from '@vercel/og'
 import { api, apiHost, rootNotionPageId } from '@/lib/config'
 import { NotionPageInfo } from '@/lib/types'
 
-const pressuraRegular = fetch(
-  new URL('../../public/fonts/GT-Pressura-Regular.ttf', import.meta.url)
-).then((res) => res.arrayBuffer())
-
 export const config = {
   runtime: 'experimental-edge',
 }
@@ -33,9 +29,9 @@ export default async function OGImage(req: NextRequest) {
   const pageInfo: NotionPageInfo = await pageInfoRes.json()
   console.log(pageInfo)
 
-  const [pressuraRegularFont] = await Promise.all([
-    pressuraRegular
-  ])
+  // const [pressuraRegularFont] = await Promise.all([
+  //   pressuraRegular
+  // ])
 
   return new ImageResponse(
     (
@@ -48,33 +44,36 @@ export default async function OGImage(req: NextRequest) {
           alignItems: 'center',
           justifyContent: 'center',
           backgroundColor: '#000',
-          color: '#fff',
-          fontFamily: '"Pressura", sans-serif',
+          color: '#fff'
         }}
       >
         <svg width="82" height="131" viewBox="0 0 164 262" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M146.747 239.667L18.6111 22.3335H104.639L136.333 76.6668L18.6111 239.667V22.3335" stroke="#fff" strokeWidth="19.0167" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
-        <span style={{
+        <div style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'stretch',
+          justifyContent: 'flex-start',
+          backgroundColor: '#000',
+          color: '#fff',
           fontFamily: '"Pressura", sans-serif',
-          fontSize: 60,
-          margin: '0 5rem',
+          margin: '0 2rem',
         }}>
-          RDFN
-        </span>
+          <h1 style={{
+            fontSize: 60,
+            margin: 0
+          }}>
+            RDFN
+          </h1>
+          <p style={{
+            fontSize: 40,
+            margin: 0
+          }}>
+            {pageInfo.title}
+          </p>
+        </div>
       </div>
-    ),
-    {
-      width: 1200,
-      height: 630,
-      fonts: [
-        {
-          name: 'Pressura',
-          data: pressuraRegularFont,
-          style: 'normal',
-          weight: 500
-        }
-      ]
-    }
+    )
   )
 }
