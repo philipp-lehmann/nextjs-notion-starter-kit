@@ -2,6 +2,7 @@
 import * as React from 'react'
 import type { AppProps } from 'next/app'
 import { useRouter } from 'next/router'
+import { Analytics } from "@vercel/analytics/react"
 
 import * as Fathom from 'fathom-client'
 // used for rendering equations (optional)
